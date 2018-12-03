@@ -1,5 +1,5 @@
-RDF to Human-readable
-=====================
+RDF to Human-readable Document
+==============================
 
 *A tool to transform files serialised in RDF to human-readable web documents.*
 
