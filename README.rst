@@ -15,3 +15,8 @@ Future
 - theme it like as a modern W3C document
 - provide an online service
 - implement inferencing capabilities
+
+
+Licence
+-------
+*Coming soon.*
