@@ -1,0 +1,119 @@
+body {
+    line-height: 1.5;
+    font-family: sans-serif;
+    overflow-wrap: break-word;
+    color: black;
+    background-size: 25px auto;
+}
+
+body:not(.toc-inline) {
+    margin: 0 4em;
+}
+
+p {
+    margin: 1em 0;
+}
+
+/* -- Anchor links ---------------------------------------------------------------------------------------------------*/
+
+a[href]:focus, a[href]:hover {
+    background: #f8f8f8;
+    background: rgba(75%, 75%, 75%, .25);
+    border-bottom-width: 3px;
+    margin-bottom: -2px;
+
+}
+
+a[href] {
+    color: #034575;
+    text-decoration: none;
+    border-bottom: 1px solid #707070;
+    padding: 0 1px 0;
+    margin: 0 -1px 0;
+}
+
+
+/* -- Description list -----------------------------------------------------------------------------------------------*/
+
+dl {
+    padding-bottom: 6px;
+}
+
+dt {
+    padding-top: 6px;
+    font-weight: bold;
+}
+
+
+/* -- Headings -------------------------------------------------------------------------------------------------------*/
+
+h1 {
+    font-style: normal;
+    font-variant-caps: normal;
+    font-weight: bold;
+    font-stretch: normal;
+    font-size: 220%;
+    line-height: normal;
+    font-size-adjust: none;
+    font-kerning: auto;
+    font-optical-sizing: auto;
+    font-variant-alternates: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-language-override: normal;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    color: #005A9C;
+    clear: both;
+}
+
+h2 {
+    font-size: 140%;
+    color: #005A9C;
+    font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 3rem;
+}
+
+h1, h2, h3, h4, h5, h6, dt {
+    line-height: 1.2;
+}
+
+
+/* -- Container ------------------------------------------------------------------------------------------------------*/
+
+.container {
+    width: 90%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 85%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 50%;
+  }
+}
