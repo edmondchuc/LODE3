@@ -16,5 +16,10 @@ def index():
     return render_template('ontology.html', t=toolkit, ont=model)
 
 
+@app.context_processor
+def context_processor():
+    return dict(t=toolkit)
+
+
 if __name__ == '__main__':
     app.run()
