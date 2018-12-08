@@ -7,7 +7,8 @@ import re
 
 def extract_property_name_from_uri(s):
     """
-    Extract the property name of a URI.
+    Extract the property name of a URI. Returns a tuple where [0] is the property name with no space and [1] is the
+    property name with a &nbsp space.
 
     :param s: A URI.
     :type s: str
@@ -27,7 +28,7 @@ def extract_property_name_from_uri(s):
             previous = i
     full_name.append(property_name[previous:])
 
-    property_name = (property_name, ' '.join(full_name)) # return a tuple (no-spaced, human-readable spaced)
+    property_name = (property_name, '&nbsp;'.join(full_name)) # return a tuple (no-spaced, human-readable spaced)
     return property_name
 
 

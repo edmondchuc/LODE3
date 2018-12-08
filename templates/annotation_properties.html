@@ -5,14 +5,13 @@
         <h2>Annotation Properties</h2>
     {% endif %}
 
+
     {# ToC #}
+    {{ generate_property_toc(ont.annotation_properties) }}
+
+
     {% for ap in ont.annotation_properties %}
-        <span class="toc-property"><a href="#{{ ap.property_name[0] }}">{{ format(ap.property_name[1]) }}</a></span>
-    {% endfor %}
-
-
-    {% for ap in ont.annotation_properties %} {# FRAGMENTS ARE ENCODING WEIRDLY? #}
-        <h3 id="{{ ap.property_name[0] }}">{{ format(ap.property_name[1]) }}</h3>
+        <h3 id="{{ ap.property_name[0] }}">{{ format(ap.property_name[1], safe=true) }}</h3>
         <strong>IRI:</strong> {{ format(ap.IRI) }}
     {% endfor %}
 {% endif %}
