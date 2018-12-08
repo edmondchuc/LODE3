@@ -1,0 +1,47 @@
+<h1>{{ format(ont.title) }}</h1>
+
+<dl>
+    <dt>IRI:</dt>
+    <dd>{{ format(ont.IRI) }}</dd>
+    <dt>Version IRI:</dt>
+    <dd>{{ format(ont.version_IRI) }}</dd>
+    <dt>Current version:</dt>
+    <dd>{{ format(ont.version) }}</dd>
+
+    {% if ont.authors|length == 1 %}
+        <dt>Author:</dt>
+    {% else %}
+        <dt>Authors:</dt>
+    {% endif %}
+    {% for author in ont.authors %}
+        <dd>{{ format(author) }}</dd>
+    {% endfor %}
+
+    {% if ont.contributors|length == 1 %}
+        <dt>Contributor:</dt>
+    {% else %}
+        <dt>Contributors:</dt>
+    {% endif %}
+    {% for contributor in ont.contributors %}
+        <dd>{{ format(contributor) }}</dd>
+    {% endfor %}
+
+    {% if ont.publishers|length == 1 %}
+        <dt>Publisher:</dt>
+    {% else %}
+        <dt>Publishers:</dt>
+    {% endif %}
+    {% for publisher in ont.publishers %}
+        <dd>{{ format(publisher) }}</dd>
+    {% endfor %}
+
+    {% if ont.imported_ontologies|length == 1 %}
+        <dt>Imported ontology:</dt>
+    {% else %}
+        <dt>Imported ontologies:</dt>
+    {% endif %}
+    {% for i_o in ont.imported_ontologies %}
+        <dd>{{ format(i_o) }}</dd>
+    {% endfor %}
+
+</dl>

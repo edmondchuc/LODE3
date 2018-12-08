@@ -12,7 +12,7 @@ Current
 Future
 ------
 - produce componentised Jinja2 templates
-- theme it like as a modern W3C document
+- theme it like a modern W3C document
 - provide an online service
 - implement inferencing capabilities
 

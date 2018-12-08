@@ -4,6 +4,7 @@ import toolkit
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET'])
 def index():
     model = RDFModel('tests/onts/gnaf-ont.ttl', 'text/turtle')

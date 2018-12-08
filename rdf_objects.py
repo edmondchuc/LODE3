@@ -29,6 +29,7 @@ import pprint as pp
 import toolkit
 
 
+# TODO: these property classes are currently redundant. See if there's any reason to keep them around.
 class RDFBase:
 
     def __init__(self, IRI, property_name, properties):
@@ -92,6 +93,17 @@ class RDFModel:
         print()
 
     @staticmethod
+    def sort_obj_props(elem):
+        """
+        This is the key for a sort function. Sort the property_name property of each RDF property by the first value of the property_name's tuple.
+
+        :param elem: An element of an RDF property list.
+        :return: property_name tuple [0]
+        :rtype: str
+        """
+        return elem.property_name[0]
+
+    @staticmethod
     def get_object_type_properties(g, object_type, class_type):
         object_type_properties = [] # like AnnotationProperties, NamedIndividuals, etc.
         ss = [] # list of subjects
@@ -112,6 +124,7 @@ class RDFModel:
                     properties.append( (p, o) )
             class_type_property = class_type(s, toolkit.extract_property_name_from_uri(s), properties)
             object_type_properties.append((class_type_property))
+        object_type_properties.sort(key=RDFModel.sort_obj_props)
         return object_type_properties
 
     def get_ontology_properties(self, g):

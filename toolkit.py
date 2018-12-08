@@ -11,8 +11,8 @@ def extract_property_name_from_uri(s):
 
     :param s: A URI.
     :type s: str
-    :return: The property name, where each word is separated by whitespace and set to lowercase.
-    :rtype: str
+    :return: The property name as a tuple (name from URI as is, name where multiple words are separated by space)
+    :rtype: tuple
     """
     property_name = str(s)  # cast to str
     # split on '#' if it exists, then on '/' and grab the last token
@@ -23,11 +23,11 @@ def extract_property_name_from_uri(s):
     previous = 0
     for i, letter in enumerate(property_name):
         if letter.isupper():
-            full_name.append(property_name[previous:i].lower())
+            full_name.append(property_name[previous:i])
             previous = i
-    full_name.append(property_name[previous:].lower())
+    full_name.append(property_name[previous:])
 
-    property_name = ' '.join(full_name)
+    property_name = (property_name, ' '.join(full_name)) # return a tuple (no-spaced, human-readable spaced)
     return property_name
 
 
@@ -50,8 +50,6 @@ def is_email(email):
     """
     Check if the email is a valid email.
 
-    This is done by matching it to a static regular expression pattern.
-
     :param email: The email to be tested.
     :return: True if the email matches the static regular expression, else false.
     :rtype: bool
@@ -61,6 +59,14 @@ def is_email(email):
 
 
 def is_url(url):
+    """
+    Check if the url is a valid url.
+
+    :param url: The url to be tested.
+    :type url: str
+    :return: True if the url passes the validation, else false.
+    :rtype: bool
+    """
     pattern = re.compile(
         r'^(?:http|ftp)s?://'  # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
@@ -71,7 +77,15 @@ def is_url(url):
     return True if re.search(pattern, url) is not None else False
 
 
-def is_literal(s):
+def render_literal(s):
+    """
+    Presume the string is serialised as markdown and convert it to HTML.
+
+    :param s: The string to be converted.
+    :type s: str
+    :return: HTML string.
+    :rtype: str
+    """
     markdowner = Markdown()
     return markdowner.convert(s)
 
