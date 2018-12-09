@@ -1,0 +1,15 @@
+{% if ont.namespaces %}
+    <h2>Namespaces</h2>
+
+    <dl>
+        <dt><em>default namespace:</em></dt>
+        <dd>{{ format(ont.get_default_namespace()) }}</dd>
+    </dl>
+
+    <dl>
+    {% for namespace in ont.namespaces %}
+       <dt>{{ format(namespace[1]) }}</dt>
+       <dd>{{ format(namespace[0]) }}</dd>
+    {% endfor %}
+    </dl>
+{% endif %}

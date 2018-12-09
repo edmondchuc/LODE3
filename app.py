@@ -13,11 +13,19 @@ def index():
     # markdowner = Markdown()
     # print(markdowner.convert(model.comment))
 
+
+
     return render_template('ontology.html', t=toolkit, ont=model)
 
 
 @app.context_processor
 def context_processor():
+    """
+    A set of global variables available to 'globally' for jinja templates.
+
+    :return: A dictionary of variables
+    :rtype: dict
+    """
     return dict(t=toolkit)
 
 

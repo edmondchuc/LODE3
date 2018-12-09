@@ -77,10 +77,25 @@ class RDFAnnotationProperty:
 
 
 class RDFModel:
+
+    NAMESPACES = [
+        (rdflib.namespace.RDF, 'rdf'),
+        (rdflib.namespace.RDFS, 'rdfs'),
+        (rdflib.namespace.OWL, 'owl'),
+        (rdflib.namespace.XSD, 'xsd'),
+        (rdflib.namespace.FOAF, 'foaf'),
+        (rdflib.namespace.SKOS, 'skos'),
+        (rdflib.namespace.DOAP, 'doap'),
+        (rdflib.namespace.DC, 'dc'),
+        (rdflib.namespace.DCTERMS, 'dct'),
+        (rdflib.namespace.VOID, 'void'),
+    ]
+
     def __init__(self, source, format):
 
         g = rdflib.Graph()
         g.parse(source, format=format)
+        self.namespaces = {}
 
         self.get_ontology_properties(g)
         self.annotation_properties = RDFModel.get_object_type_properties(g, OWL.AnnotationProperty, RDFAnnotationProperty)
@@ -89,8 +104,49 @@ class RDFModel:
         self.object_properties = RDFModel.get_object_type_properties(g, OWL.ObjectProperty, RDFObjectProperty)
         self.class_properties = RDFModel.get_object_type_properties(g, OWL.Class, RDFClass)
 
-        print(isinstance(self.annotation_properties[0].IRI, rdflib.URIRef))
-        print()
+        self.namespaces = RDFModel.get_namespaces(g, self.IRI)
+
+    def get_default_namespace(self):
+        return self.IRI + '#'
+
+    @staticmethod
+    def get_namespaces(g, IRI):
+        IRI = IRI + '#'
+        namespaces = []
+        uris = set(g.subjects()).union(g.predicates()).union(g.objects())
+        for uri in uris:
+            if isinstance(uri, rdflib.URIRef):
+                property_name = uri.split('#')[-1].split('/')[-1]
+                uri = uri[:len(uri)-len(property_name)]
+                if uri not in namespaces:
+                    # Don't add the URI if it gets trimmed to 'http://' or if it is the default namespace
+                    if uri != 'http://' and uri != str(IRI):
+                        # if
+                        for n in RDFModel.NAMESPACES:
+                            if str(n[0]) == uri:
+                                if (str(n[0])) not in [x[0] for x in namespaces]:
+                                    namespaces.append((str(n[0]), n[1]))
+                                    continue  # go to the next loop
+                        # else
+                        namespace_name = uri[:-1].split('/')[-1]
+                        if uri not in [x[0] for x in namespaces]:
+                            if namespace_name == '1.1':
+                                print('found')
+                            namespaces.append((uri, namespace_name))
+        # print(rdflib.namespace.RDFS.term('subClassOf'))
+        namespaces.sort(key=RDFModel.sort_namespaces)
+        print(namespaces)
+        return namespaces
+
+    @staticmethod
+    def sort_namespaces(elem):
+        """
+
+
+        :param elem:
+        :return:
+        """
+        return elem[1]
 
     @staticmethod
     def sort_obj_props(elem):

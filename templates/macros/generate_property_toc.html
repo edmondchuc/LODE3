@@ -1,4 +1,10 @@
 {# -- Generate table of content for a property (NamedIndividual, Class, etc.) ----------------------------------------#}
+{#
+Input:
+    properties - List of properties of a certain OWL type, Classes, NamedIndividuals, ObjectProperties, etc.
+Output:
+    A table of contents for the specific OWL property.
+#}
 {% macro generate_property_toc(properties) %}
     <div class="toc-property-container">
         {% for p in properties %}

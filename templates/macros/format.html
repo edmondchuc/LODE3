@@ -1,9 +1,11 @@
 {# -- Serialize data to the correct HTML format depending if it's an rdflib.Literal or rdflib.URIRef ---------------- #}
 {#
-Parameters:
+Input:
     s - the string to be formatted
     markdown - should the string be considered as markdown and transformed into HTML? (default is false)
     safe - should the string be displayed without escaping characters (default is false)
+Output:
+    A snippet of HTML serialised as the correct format for emails, urls, etc.
 #}
 
 {% macro format(s, markdown=false, safe=false) %}
