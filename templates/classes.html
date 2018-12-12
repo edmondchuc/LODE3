@@ -1,0 +1,10 @@
+{% if ont.classes %}
+    {% if ont.classes|length == 1 %}
+        <h2>Class</h2>
+    {% else %}
+        <h2>Classes</h2>
+    {% endif %}
+
+    {# ToC #}
+    {{ generate_property_toc(ont.classes) }}
+{% endif %}
