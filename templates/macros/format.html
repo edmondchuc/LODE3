@@ -2,19 +2,19 @@
 {#
 Input:
     s - the string to be formatted
-    markdown - should the string be considered as markdown and transformed into HTML? (default is false)
-    safe - should the string be displayed without escaping characters (default is false)
+    markdown - the string be considered as markdown and transformed into HTML (default is false)
+    safe - the string be displayed without escaping characters (default is false)
 Output:
     A snippet of HTML serialised as the correct format for emails, urls, etc.
 #}
 
 {% macro format(s, markdown=false, safe=false) %}
-    {% if t.is_email(s) %}
+    {% if h.is_email(s) %}
         <a href="mailto:{{ s }}">{{ s }}</a>
-    {% elif t.is_url(s) %}
+    {% elif h.is_url(s) %}
         <a href="{{ s }}">{{ s }}</a>
     {% elif markdown %}
-        {{ t.render_literal(s)|safe }}
+        {{ h.render_literal(s)|safe }}
     {% elif safe %}
         {{ s|safe }}
     {% else %}

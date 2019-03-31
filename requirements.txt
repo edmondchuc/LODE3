@@ -1,3 +1,4 @@
 rdflib
 Flask
 markdown2
+owlrl

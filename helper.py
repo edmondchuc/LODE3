@@ -62,7 +62,7 @@ def is_email(email):
     return True if re.search(pattern, email) is not None else False
 
 
-def is_url(url):
+def is_url(url): # TODO: perhaps check the object type is URIRef instead of using regex.
     """
     Check if the url is a valid url.
 
@@ -71,6 +71,9 @@ def is_url(url):
     :return: True if the url passes the validation, else false.
     :rtype: bool
     """
+    if isinstance(url, rdflib.URIRef):
+        return True
+
     pattern = re.compile(
         r'^(?:http|ftp)s?://'  # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...

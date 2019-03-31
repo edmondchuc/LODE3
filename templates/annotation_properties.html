@@ -11,7 +11,19 @@
 
 
     {% for ap in ont.annotation_properties %}
-        <h3 id="{{ ap.property_name[0] }}">{{ format(ap.property_name[1], safe=true) }}</h3>
-        <strong>IRI:</strong> {{ format(ap.IRI) }}
+    <div class="property-card">
+        <h3 id="{{ ap.label }}">{{ format(ap.label, safe=true) }}</h3>
+
+        <dl>
+            {% if ap.uri %}
+                <dt>IRI:</dt>
+                <dd>{{ format(ap.uri) }}</dd>
+            {% endif %}
+
+            {% if ap.rdfs_range != 'None' %}
+                <div><strong>has range:</strong> <a href="#{{ ap.rdfs_range }}">{{ ap.rdfs_range }}</a></div>
+            {% endif %}
+        </dl>
+    </div>
     {% endfor %}
 {% endif %}

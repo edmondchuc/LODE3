@@ -2,7 +2,7 @@
 
 <dl>
     <dt>IRI:</dt>
-    <dd>{{ format(ont.IRI) }}</dd>
+    <dd>{{ format(ont.iri) }}</dd>
     <dt>Version IRI:</dt>
     <dd>{{ format(ont.version_IRI) }}</dd>
     <dt>Current version:</dt>
@@ -44,4 +44,12 @@
         <dd>{{ format(i_o) }}</dd>
     {% endfor %}
 
+    {% if ont.sources|length == 1 %}
+        <dt>Related resource:</dt>
+    {% else %}
+        <dt>Related resources</dt>
+    {% endif %}
+    {% for s in ont.sources %}
+        <dd>{{ format(s) }}</dd>
+    {% endfor %}
 </dl>

@@ -1,0 +1,14 @@
+{# -- Display the common properties of an OWL property as HTML ------------------------------------------------------ #}
+{#
+Input:
+    o - property object containing the property name, its IRI and its other triples.
+Output:
+    A snippet of HTMl to display the properties of the OWL property.
+#}
+
+{% macro display(o) %}
+    <h3 id="{{ o.label }}">{{ format(o.label, safe=true) }}</h3>
+    <strong>IRI:</strong> {{ format(o.uri) }}
+
+
+{% endmacro %}

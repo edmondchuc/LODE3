@@ -7,4 +7,34 @@
 
     {# ToC #}
     {{ generate_property_toc(ont.classes) }}
+
+    {% for class in ont.classes %}
+    <div class="property-card">
+        <h3 id="{{ class.label }}">{{ format(class.label, safe=true) }}</h3>
+
+        <dl>
+            {% if class.uri %}
+                <dt>IRI:</dt>
+                <dd>{{ format(class.uri) }}</dd>
+            {% endif %}
+
+            {% if class.is_defined_by %}
+                <dt>is defined by:</dt>
+                <dd>{{ format(class.is_defined_by) }}</dd>
+            {% endif %}
+
+            {% if class.comment %}
+                <dt>description:</dt>
+                <dd>{{ class.comment }}</dd>
+            {% endif %}
+
+            {% if class.sub_class_of %}
+                <dt>sub class of:</dt>
+                {% for sco in class.sub_class_of %}
+                    <dd><a href="#{{ sco['uri'] }}">{{ sco['label'] }}</a></dd>
+                {% endfor %}
+            {% endif %}
+        </dl>
+    </div>
+    {% endfor %}
 {% endif %}
